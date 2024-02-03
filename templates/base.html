@@ -1,0 +1,28 @@
+<!-- quiz/templates/base.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Quiz App{% endblock %}</title>
+    {% block extrahead %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Welcome to the Quiz App</h1>
+    </header>
+    <nav>
+        <!-- Навигация по сайту -->
+    </nav>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 Quiz App</p>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+    {% block extrajs %}{% endblock %}
+</body>
+</html>

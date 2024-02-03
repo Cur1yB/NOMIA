@@ -1,0 +1,21 @@
+<!-- quiz/templates/quiz_template.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Quiz Question{% endblock %}
+
+{% block extrahead %}
+<!-- Сюда можно добавить специфичные стили или скрипты для страницы квиза -->
+{% endblock %}
+
+{% block content %}
+<article>
+    <h2>Question 1:</h2>
+    <form method="post">
+        {% csrf_token %}
+        <!-- Представление вопроса и вариантов ответа -->
+        <!-- Например, используя form.as_p или перебор полей в цикле -->
+        <button type="submit">Submit</button>
+    </form>
+</article>
+{% endblock %}
