@@ -1,4 +1,5 @@
 <!-- quiz/templates/base.html -->
+{% load static %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,23 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Quiz App{% endblock %}</title>
-    {% block extrahead %}{% endblock %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <header>
-        <h1>Welcome to the Quiz App</h1>
+    <header style="background-image: url('{% static "images/header.jpg" %}');">
+        <div class="logo">
+            <img src="{% static 'images/logo_.png' %}" alt="Logo">
+        </div>
     </header>
-    <nav>
-        <!-- Навигация по сайту -->
-    </nav>
-    <main>
-        {% block content %}{% endblock %}
-    </main>
-    <footer>
-        <p>&copy; 2024 Quiz App</p>
+
+    {% block content %}{% endblock %}
+
+    <footer style="background-image: url('{% static "images/footer.jpg" %}');">
+        <p>Ignatiev Alexander</p>
+        <a href="https://t.me/Lexx777">Telegram: @Lexx777</a>
     </footer>
-    <script src="{% static 'js/script.js' %}"></script>
-    {% block extrajs %}{% endblock %}
 </body>
 </html>
+

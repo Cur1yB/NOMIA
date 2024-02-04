@@ -1,0 +1,14 @@
+<!-- quiz/templates/start_page.html -->
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Начало тестирования{% endblock %}
+
+{% block content %}
+<article class="startpage">
+    <h2>Добро пожаловать в QuizApp!</h2>
+    <form action="{% url 'question_view' question_id=first_question_id %}" method="get">
+        <button type="submit">Начать тестирование</button>
+    </form>
+</article>
+{% endblock %}

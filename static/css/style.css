@@ -1,0 +1,148 @@
+/* quiz/css/style.css */
+
+/*--------- общие стили документа ---------*/
+
+header {
+    background-size: cover;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header .logo img {
+    max-width: 150px;
+}
+
+footer {
+    font-family: 'Courier New', Courier, monospace;
+    background-size: cover;
+    height: 150px; 
+    color: #fff; 
+    padding: 20px 0;
+}
+
+footer a {
+    color: #fff; 
+    text-decoration: none;
+    font-size: 14pt;
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+footer p {
+    margin-left: 20px;
+    margin-top: 30px;
+}
+
+/*--------- стартовая страница ---------*/
+
+.startpage {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 60vh;
+    text-align: center;
+}
+
+.startpage h2 {
+    margin-bottom: 20px;
+}
+
+.startpage button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    border-radius: 5px;
+}
+
+.startpage button:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+/*--------- страница ответов ---------*/
+
+.quiz-container, .end-quiz-container {
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 60vh;
+}
+
+.quiz-form .form-group {
+    font-size: 1.3em;
+    margin-left: 10px;
+}
+
+.quiz-form .form-group input[type="radio"] {
+    transform: scale(1.2);
+    margin-right: 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.quiz-form .form-group input[type="radio"]:hover {
+    transform: scale(1.5);
+}
+
+.submit-button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #0c8964;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.submit-button:hover {
+    background-color: #075d46;
+    transform: scale(1.05);
+}
+
+.submit-button:active {
+    background-color: #064e3b;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+}
+
+/*--------- финальная страница ---------*/
+
+.end-quiz-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 60vh;
+}
+
+.end-quiz-link {
+    max-width: 200px;
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    background-color: #0c8964;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.end-quiz-link:hover {
+    transform: scale(1.1);
+    background-color: #064d33;
+}
+
+.end-quiz-link:active {
+    transform: scale(0.9);
+}

@@ -4,18 +4,23 @@
 
 {% block title %}Quiz Question{% endblock %}
 
-{% block extrahead %}
-<!-- Сюда можно добавить специфичные стили или скрипты для страницы квиза -->
-{% endblock %}
-
 {% block content %}
-<article>
-    <h2>Question 1:</h2>
-    <form method="post">
+<article class="quiz-container">
+    <h2>{{ question.text }}</h2>
+    <form method="post" class="quiz-form">
         {% csrf_token %}
-        <!-- Представление вопроса и вариантов ответа -->
-        <!-- Например, используя form.as_p или перебор полей в цикле -->
-        <button type="submit">Submit</button>
+        {% for field in form %}
+            <div class="form-group">
+                {% if field.label != "Selected option" %}
+                    <label>{{ field.label }}</label>
+                {% endif %}
+                {{ field }}
+            </div>
+        {% endfor %}
+        <button type="submit" class="submit-button">Отправить</button>
     </form>
+    {% if not form.is_bound %}
+        <p>Пожалуйста, выберите один из вариантов ответа.</p>
+    {% endif %}
 </article>
 {% endblock %}

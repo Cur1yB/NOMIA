@@ -2,26 +2,40 @@
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Question
+from quiz_app.forms import ChoiceForm, TextForm
+
+def start_page(request):
+    first_question_id = Question.objects.order_by('id').first().id
+    return render(request, 'start_page.html', {'first_question_id': first_question_id})
+
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Question, AnswerOption
 from .forms import ChoiceForm, TextForm
 
 def question_view(request, question_id):
     question = get_object_or_404(Question, id=question_id)
     if question.question_type == Question.TEXT:
-        form_class = TextForm
+        form = TextForm(request.POST or None)
     else:
-        form_class = ChoiceForm
+        # Передаем question_id при инициализации ChoiceForm
+        form = ChoiceForm(request.POST or None, question_id=question.id)
     
-    if request.method == 'POST':
-        form = form_class(request.POST)
-        if form.is_valid():
-            response = form.save(commit=False)
-            response.question = question
-            response.save()
-            return redirect('next_question')
-    else:
-        form = form_class()
+    if request.method == 'POST' and form.is_valid():
+        response = form.save(commit=False)
+        response.question = question
+        response.save()
+        # Перенаправление на следующий вопрос или страницу результатов
+        next_question_id = Question.objects.filter(id__gt=question_id).order_by('id').first()
+        if next_question_id:
+            return redirect('question_view', question_id=next_question_id.id)
+        else:
+            return redirect('end_of_quiz') 
     
     return render(request, 'quiz_template.html', {'form': form, 'question': question})
+
+def end_of_quiz(request):
+    # Здесь будет логика подсчета результатов
+    return render(request, 'end_of_quiz.html')
 
 '''# Импортируем необходимые функции и классы из Django и из текущего приложения
 from django.shortcuts import render, get_object_or_404, redirect
