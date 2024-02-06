@@ -6,6 +6,7 @@
 
 {% block content %}
 <article class="quiz-container">
+    <h3>Вопрос №{{ current_question_number }}</h3>
     <h2>{{ question.text }}</h2>
     <form method="post" class="quiz-form">
         {% csrf_token %}

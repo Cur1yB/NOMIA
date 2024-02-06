@@ -1,0 +1,34 @@
+<!-- quiz/templates/statistics.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Статистика опроса{% endblock %}
+
+{% block content %}
+<h2>Статистика по всем вопросам</h2>
+
+<div>
+    {% if statistics %}
+        Всего уникальных участников: {{ total_participants }}
+        {% for question in statistics %}
+        <div>
+            <h3>{{ question.rank }}. {{ question.question_text }}</h3>
+            <p>Количество ответивших: {{ question.total_responses }}</p>
+            {% for option in question.options %}
+                <p>{{ option.text }}: {{ option.count }} ответов, {{ option.rate }}%</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <h2>Обратите внимание!</h2>
+        <p>
+            В связи с тем, что один и тот же участник может проходить опрос несколько раз, 
+            общее количество данных ответов по отдельным вопросам может превышать число уникальных участников опроса. 
+            Это следует учитывать при анализе статистики.
+        </p>
+        <a href="{% url 'start_page' %}" class="end-quiz-link">Пройти опрос заново</a>
+    {% else %}
+        <p>Статистика не доступна.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

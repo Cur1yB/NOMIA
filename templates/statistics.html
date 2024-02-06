@@ -1,0 +1,30 @@
+<!-- quiz/templates/statistics.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Статистика опроса{% endblock %}
+
+{% block content %}
+<h2>Статистика ответов на вопросы данного опроса</h2>
+
+<div>
+    {% if statistics %}
+        Всего уникальных участников: {{ total_participants }} <!-- В зависимости от количества уникальных сессий -->
+        {% for question in statistics %}
+        <div>
+            <h3>{{ question.rank }}. {{ question.question_text }}</h3>
+            <p>Количество ответов: {{ question.total_responses }}</p>
+            {% for option in question.options %}
+                <p>{{ option.text }}: {{ option.count }} ответов, {{ option.rate }}%</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+        <h2>Обратите внимание!</h2>
+        <p>В связи с тем, что один и тот же участник может проходить опрос несколько раз, общее количество данных ответов по отдельным вопросам может превышать число уникальных участников опроса. Это следует учитывать при анализе статистики.</p>
+    {% else %}
+        <p>Статистика не доступна.</p>
+    {% endif %}
+    <a href="{% url 'view_all_questions_statistics' %}" class="end-quiz-link">Просмотр статистики по всем вопросам</a>
+</div>
+
+{% endblock %}

@@ -8,6 +8,8 @@
 <article class="end-quiz-container">
     <h2>Спасибо за прохождение опроса!</h2>
     <p>Ваши ответы успешно сохранены.</p>
+    <h2>Ваш счёт: {{ score }} из 40</h2>
     <a href="{% url 'start_page' %}" class="end-quiz-link">Пройти опрос заново</a>
+    <a href="{% url 'view_statistics' %}" class="end-quiz-link">Просмотр статистики</a>
 </article>
 {% endblock %}

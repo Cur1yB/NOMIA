@@ -30,6 +30,8 @@ class UserResponse(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer_text = models.TextField(blank=True, null=True)  # Для текстовых ответов
     selected_option = models.ForeignKey(AnswerOption, on_delete=models.CASCADE, null=True, blank=True)  # Для ответов с выбором
+    is_correct = models.BooleanField(default=False)  
+    session_key = models.CharField(max_length=40, default='default_session_key')
 
     def __str__(self):
         return f"Response to {self.question.text} by {self.id}"
