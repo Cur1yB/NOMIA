@@ -18,6 +18,7 @@ class Question(models.Model):
     def __str__(self):
         return self.text
 
+
 class AnswerOption(models.Model):
     question = models.ForeignKey(Question, related_name='options', on_delete=models.CASCADE)
     text = models.CharField(max_length=255)
@@ -25,6 +26,7 @@ class AnswerOption(models.Model):
 
     def __str__(self):
         return self.text
+
 
 class UserResponse(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

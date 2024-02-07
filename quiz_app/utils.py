@@ -3,13 +3,15 @@
 from django.db import connection
 from collections import OrderedDict
 
-def get_total_participants(): # Вычисляем сколько всего уникальных участников
+def get_total_participants(): 
+    # Вычисляет общее количество уникальных участников опроса, основываясь на количестве уникальных сессий.
     with connection.cursor() as cursor:
         cursor.execute("SELECT COUNT(DISTINCT session_key) FROM quiz_app_userresponse")
         total_participants = cursor.fetchone()[0]
     return total_participants
 
-def get_choice_statistics(request):
+def get_choice_statistics(request): 
+    # Возвращает статистику по выборам ответов на вопросы для текущей сессии пользователя.
     last_test_question_ids = request.session.get('answered_questions', [])
     if not last_test_question_ids:
         return []
@@ -67,7 +69,8 @@ def get_choice_statistics(request):
 
     return statistics
     
-def get_text_answers_statistics(request):
+def get_text_answers_statistics(request): 
+    # Собирает статистику по текстовым ответам пользователя в текущей сессии.
     last_test_question_ids = request.session.get('answered_questions', [])
     if not last_test_question_ids:
         return []
@@ -123,14 +126,12 @@ def get_text_answers_statistics(request):
     return statistics
   
 def transform_statistics(choice_statistics, text_statistics):
+    # Объединяет статистику по выборам и текстовым ответам, подготавливая данные для вывода.
     questions_dict = OrderedDict()
-
-    # Изначально объединяем статистику выбора и текстовую статистику, убеждаясь, что все необходимые ключи присутствуют
     merged_statistics = []
     for stat in choice_statistics:
         merged_statistics.append(stat)
     for stat in text_statistics:
-        # Убедимся, что total_responses включен для текстовых ответов, даже если его изначально нет
         if 'total_responses' not in stat:
             stat['total_responses'] = calculate_total_responses_for_text(stat['question_id'], choice_statistics)
         merged_statistics.append(stat)
@@ -163,10 +164,12 @@ def transform_statistics(choice_statistics, text_statistics):
     return list(questions_dict.values())
 
 def calculate_total_responses_for_text(question_id, choice_statistics):
+    # Рассчитывает общее количество ответов на текстовые вопросы для поддержки статистики.
     return sum(stat['total_responses'] for stat in choice_statistics if stat['question_id'] == question_id)
 
 def calculate_question_ranks(questions_dict):
-    # Функция для ранжирования
+    # Ранжирует вопросы в зависимости от общего количества ответов, поддерживая порядковые номера для вопросов 
+    # с одинаковым количеством ответов.
     current_rank = 1
     last_total_responses = None
     for question in questions_dict.values():
@@ -176,6 +179,7 @@ def calculate_question_ranks(questions_dict):
         last_total_responses = question['total_responses']
 
 def get_all_questions_choice_statistics():
+    # Генерирует статистику по всем вариантам ответов в базе данных, независимо от сессии пользователя.
     with connection.cursor() as cursor:
         # Запрос для получения статистики по каждому варианту ответа для всех вопросов
         answers_statistics_query = """
@@ -225,6 +229,7 @@ def get_all_questions_choice_statistics():
     return statistics
     
 def get_all_questions_text_answers_statistics():
+    # Собирает статистику по всем текстовым ответам в базе данных.
     with connection.cursor() as cursor:
         # Запрос для получения статистики по текстовым ответам для всех вопросов
         text_answers_query = """
