@@ -131,6 +131,7 @@ footer p {
     display: inline-block;
     padding: 10px 20px;
     margin-top: 20px;
+    margin-bottom   : 20px;
     background-color: #0c8964;
     color: white;
     text-decoration: none;

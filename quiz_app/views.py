@@ -51,7 +51,10 @@ def question_view(request, question_id):
         
         # Определяем следующий вопрос
         next_question = determine_next_question(request, is_correct)
-        return redirect('question_view', question_id=next_question.id)
+        if next_question:
+            return redirect('question_view', question_id=next_question.id)
+        else:
+            return HttpResponseRedirect(reverse('end_of_quiz'))
     
     return render(request, 'quiz_template.html', {
         'form': form, 
