@@ -2,7 +2,7 @@
 
 from django.core.management.base import BaseCommand
 from quiz_app.models import Question, AnswerOption
-from .questions_ import text_questions_and_answers  # Убедитесь, что путь до questions_and_answers корректен
+from .questions_ import text_questions_and_answers
 
 class Command(BaseCommand):
     help = 'Load a list of text questions and answers into the database'

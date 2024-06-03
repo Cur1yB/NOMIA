@@ -24,18 +24,12 @@
     pip install -r requirements.txt
     ```
 
-3. Выполнить миграции для создания структуры базы данных:
+3. Выполнить начальную настройку базы данных с помощью скрипта `create_db.sh`:
     ```
-    python manage.py migrate
-    ```
-
-4. Загрузить предварительные данные для вопросов (если необходимо):
-    ```
-    python manage.py load_questions_text
-    python manage.py load_questions_choices
+    ./create_db.sh
     ```
 
-5. Запустить сервер разработки:
+4. Запустить сервер разработки:
     ```
     python manage.py runserver
     ```
